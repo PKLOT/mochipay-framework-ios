@@ -50,9 +50,7 @@ extension MPPaymentHandler: MPPaymentDelegateProxy {
         if let string = String(data: payment.token.paymentData, encoding: String.Encoding.utf8) {
             print("\(string)")
         }
-//        Alamofire.request(URL.init(string: "https://upload.wikimedia.org/wikipedia/commons/7/77/Google_Images_2015_logo.svg")!, method: .get).response { (response) in
-//            completion(PKPaymentAuthorizationResult.init(status: .success, errors: nil))
-//        }
+        completion(PKPaymentAuthorizationResult.init(status: .success, errors: nil))
     }
     
     func paymentAuthorizationControllerWillAuthorizePayment(_ controller: PKPaymentAuthorizationController) {
