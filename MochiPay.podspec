@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Wii Lin' => 'wiilin@pklotcorp.com' }
-  s.source           = { :git => 'https://github.com/PKLOT/mochipay-framework-ios.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/PKLOT/mochipay-framework-ios.git', :tag => '0.1.0' }
   s.source_files     = 'MochiPay/Classes/**/*'
   
   s.ios.deployment_target = '11.0'
