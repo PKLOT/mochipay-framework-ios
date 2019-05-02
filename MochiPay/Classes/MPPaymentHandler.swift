@@ -6,7 +6,6 @@
 //  Copyright © 2019 Pklotcorp. All rights reserved.
 //
 
-import UIKit
 import PassKit
 public class MPPaymentHandler: NSObject {
     private var delegate: MPPaymentDelegate?

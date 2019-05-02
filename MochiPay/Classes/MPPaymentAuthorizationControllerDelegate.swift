@@ -6,7 +6,6 @@
 //  Copyright © 2019 Pklotcorp. All rights reserved.
 //
 
-import UIKit
 import PassKit
 
 @objc public protocol MPPaymentDelegate : class {

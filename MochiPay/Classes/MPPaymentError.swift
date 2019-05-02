@@ -6,8 +6,6 @@
 //  Copyright © 2019 Pklotcorp. All rights reserved.
 //
 
-import UIKit
-
 @objc public enum MPPaymentErrorType: Int {
     case failedPresentPaymentController
 }
