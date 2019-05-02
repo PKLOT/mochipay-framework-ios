@@ -2,12 +2,12 @@
 //  ViewController.swift
 //  MochiPay
 //
-//  Created by ya790504@gmail.com on 05/02/2019.
-//  Copyright (c) 2019 ya790504@gmail.com. All rights reserved.
+//  Created by Wii Lin on 05/02/2019.
+//  Copyright (c) 2019 Wii Lin. All rights reserved.
 //
 
 import UIKit
-
+import MochiPay
 class ViewController: UIViewController {
 
     override func viewDidLoad() {

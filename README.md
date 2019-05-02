@@ -1,6 +1,6 @@
 # MochiPay
 
-[![CI Status](https://img.shields.io/travis/ya790504@gmail.com/MochiPay.svg?style=flat)](https://travis-ci.org/ya790504@gmail.com/MochiPay)
+[![CI Status](https://img.shields.io/travis/wiilin@pklotcorp.com/MochiPay.svg?style=flat)](https://travis-ci.org/wiilin@pklotcorp.com/MochiPay)
 [![Version](https://img.shields.io/cocoapods/v/MochiPay.svg?style=flat)](https://cocoapods.org/pods/MochiPay)
 [![License](https://img.shields.io/cocoapods/l/MochiPay.svg?style=flat)](https://cocoapods.org/pods/MochiPay)
 [![Platform](https://img.shields.io/cocoapods/p/MochiPay.svg?style=flat)](https://cocoapods.org/pods/MochiPay)
@@ -22,7 +22,7 @@ pod 'MochiPay'
 
 ## Author
 
-ya790504@gmail.com, ya790504@gmail.com
+wiilin@pklotcorp.com
 
 ## License
 
