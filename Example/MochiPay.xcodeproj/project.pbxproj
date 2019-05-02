@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		133A1071EEB873E0EB4CFE42 /* Pods_MochiPay_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59AA71A500ADE7D8AB2C49ED /* Pods_MochiPay_Example.framework */; };
+		28BD784D227AD11E0029EF0E /* MPAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BD784C227AD11D0029EF0E /* MPAppDelegate.swift */; };
+		28BD7851227AD2430029EF0E /* MPMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BD784E227AD2430029EF0E /* MPMainViewModel.swift */; };
+		28BD7852227AD2430029EF0E /* MPConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BD784F227AD2430029EF0E /* MPConfiguration.swift */; };
+		28BD7853227AD2430029EF0E /* MPMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BD7850227AD2430029EF0E /* MPMainViewController.swift */; };
 		2BFB7A97CB10C4205D9F5DB1 /* Pods_MochiPay_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4383CA64ADDAB13C17C3373 /* Pods_MochiPay_Tests.framework */; };
-		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
@@ -29,14 +31,16 @@
 
 /* Begin PBXFileReference section */
 		1AA18CFFB61C5C6507D3B24A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		28BD784C227AD11D0029EF0E /* MPAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPAppDelegate.swift; sourceTree = "<group>"; };
+		28BD784E227AD2430029EF0E /* MPMainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPMainViewModel.swift; sourceTree = "<group>"; };
+		28BD784F227AD2430029EF0E /* MPConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPConfiguration.swift; sourceTree = "<group>"; };
+		28BD7850227AD2430029EF0E /* MPMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPMainViewController.swift; sourceTree = "<group>"; };
 		3BAB977B1FC1F0CA7B034C7F /* MochiPay.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MochiPay.podspec; path = ../MochiPay.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		440D9EB4A0873BA8C116FFAE /* Pods-MochiPay_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MochiPay_Example.debug.xcconfig"; path = "Target Support Files/Pods-MochiPay_Example/Pods-MochiPay_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		59AA71A500ADE7D8AB2C49ED /* Pods_MochiPay_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MochiPay_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C795CCC440E780E8DCD9CD2 /* Pods-MochiPay_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MochiPay_Tests.debug.xcconfig"; path = "Target Support Files/Pods-MochiPay_Tests/Pods-MochiPay_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* MochiPay_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MochiPay_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -93,8 +97,10 @@
 		607FACD21AFB9204008FA782 /* Example for MochiPay */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				28BD784F227AD2430029EF0E /* MPConfiguration.swift */,
+				28BD7850227AD2430029EF0E /* MPMainViewController.swift */,
+				28BD784E227AD2430029EF0E /* MPMainViewModel.swift */,
+				28BD784C227AD11D0029EF0E /* MPAppDelegate.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -206,9 +212,10 @@
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = MP;
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = CocoaPods;
+				ORGANIZATIONNAME = Pklotcorp;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -331,8 +338,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
-				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				28BD784D227AD11E0029EF0E /* MPAppDelegate.swift in Sources */,
+				28BD7852227AD2430029EF0E /* MPConfiguration.swift in Sources */,
+				28BD7853227AD2430029EF0E /* MPMainViewController.swift in Sources */,
+				28BD7851227AD2430029EF0E /* MPMainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,7 +428,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -465,7 +474,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -479,6 +488,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MochiPay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -494,6 +504,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MochiPay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";

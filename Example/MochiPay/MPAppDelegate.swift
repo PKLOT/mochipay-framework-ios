@@ -3,13 +3,13 @@
 //  MochiPay
 //
 //  Created by Wii Lin on 05/02/2019.
-//  Copyright (c) 2019 Wii Lin. All rights reserved.
+//  Copyright (c) 2019 Pklotcorp. All rights reserved.
 //
 
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class MPAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
