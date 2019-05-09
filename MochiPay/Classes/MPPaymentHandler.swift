@@ -47,10 +47,11 @@ extension MPPaymentHandler: MPPaymentDelegateProxy {
     
     func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
         print(#function)
-        if let string = String(data: payment.token.paymentData, encoding: String.Encoding.utf8) {
-            print("\(string)")
+        if nil != self.delegate?.paymentAuthorizationController?(controller, didAuthorizePayment: payment, handler: { (result) in
+            completion(result)
+        }) {
+            completion(PKPaymentAuthorizationResult.init(status: .failure, errors: nil))
         }
-        completion(PKPaymentAuthorizationResult.init(status: .success, errors: nil))
     }
     
     func paymentAuthorizationControllerWillAuthorizePayment(_ controller: PKPaymentAuthorizationController) {
