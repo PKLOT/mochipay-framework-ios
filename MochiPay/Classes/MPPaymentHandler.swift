@@ -19,7 +19,7 @@ import PassKit
     
     
     /// Tells the delegate that the user has authorized the payment request and asks for a result.
-    @objc optional func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void)
+    @objc func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void)
     
     
     /// Tells the delegate that the user is authorizing the payment request.
@@ -74,11 +74,9 @@ extension MPPaymentHandler: PKPaymentAuthorizationControllerDelegate {
     
     public func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
         print(#function)
-        if nil != self.delegate?.paymentAuthorizationController?(controller, didAuthorizePayment: payment, handler: { (result) in
+        self.delegate?.paymentAuthorizationController?(controller, didAuthorizePayment: payment, handler: { (result) in
             completion(result)
-        }) {
-            completion(PKPaymentAuthorizationResult.init(status: .failure, errors: nil))
-        }
+        })
     }
     
     public func paymentAuthorizationControllerWillAuthorizePayment(_ controller: PKPaymentAuthorizationController) {

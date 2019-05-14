@@ -8,14 +8,14 @@
 
 Pod::Spec.new do |s|
   s.name                  = 'MochiPay'
-  s.version               = '0.1.2'
+  s.version               = '0.1.3'
   s.homepage              = 'https://github.com/PKLOT/mochipay-framework-ios.git'
   s.license               = { :type => 'MIT', :file => 'LICENSE' }
   s.author                = { 'Wii Lin' => 'wiilin@pklotcorp.com' }
   s.ios.deployment_target = '11.0'
   s.swift_version         = '4.0'
   s.requires_arc          = true
-  s.source                = { :git => 'https://github.com/PKLOT/mochipay-framework-ios.git', :tag => '0.1.2' }
+  s.source                = { :git => 'https://github.com/PKLOT/mochipay-framework-ios.git', :tag => '0.1.3' }
   s.source_files          = 'MochiPay/Classes/**/*'
   
 
