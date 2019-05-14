@@ -74,7 +74,7 @@ extension MPPaymentHandler: PKPaymentAuthorizationControllerDelegate {
     
     public func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
         print(#function)
-        self.delegate?.paymentAuthorizationController?(controller, didAuthorizePayment: payment, handler: { (result) in
+        self.delegate?.paymentAuthorizationController(controller, didAuthorizePayment: payment, handler: { (result) in
             completion(result)
         })
     }
