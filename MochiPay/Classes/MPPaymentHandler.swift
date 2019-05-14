@@ -11,7 +11,8 @@ import PassKit
 @objc public protocol MPPaymentDelegate : class {
     
     /// Tells the delegate that payment authorization failure.
-    @objc func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController,didFailure failure: MPPaymentErrorType)
+    @objc func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController,didFailure failure: Error)
+    @objc func paymentAuthorizationControllerDidSuccess(_ controller: PKPaymentAuthorizationController)
     
     
     /// Tells the delegate that payment authorization finished.
@@ -19,7 +20,7 @@ import PassKit
     
     
     /// Tells the delegate that the user has authorized the payment request and asks for a result.
-    @objc func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void)
+//    @objc func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void)
     
     
     /// Tells the delegate that the user is authorizing the payment request.
@@ -61,7 +62,7 @@ public class MPPaymentHandler: NSObject {
                 NSLog("Presented payment controller")
             } else {
                 NSLog("Failed to present payment controller")
-                self.delegate?.paymentAuthorizationController(paymentController, didFailure: .failedPresentPaymentController)
+                self.delegate?.paymentAuthorizationController(paymentController, didFailure: NSError.init(domain: "", code: 1, userInfo: [NSLocalizedDescriptionKey:"Failed to present payment controller"]))
             }
         })
     }
@@ -74,9 +75,19 @@ extension MPPaymentHandler: PKPaymentAuthorizationControllerDelegate {
     
     public func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
         print(#function)
-        self.delegate?.paymentAuthorizationController(controller, didAuthorizePayment: payment, handler: { (result) in
-            completion(result)
-        })
+        let string = String(decoding: payment.token.paymentData, as: UTF8.self)
+        MPApis.shared.applePay(paymenyData: string) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                completion(.init(status: .success, errors: nil))
+                self.delegate?.paymentAuthorizationControllerDidSuccess(controller)
+            case .failure(let error):
+                completion(.init(status: .failure, errors: [error]))
+                self.delegate?.paymentAuthorizationController(controller, didFailure: error)
+            }
+        }
+
     }
     
     public func paymentAuthorizationControllerWillAuthorizePayment(_ controller: PKPaymentAuthorizationController) {

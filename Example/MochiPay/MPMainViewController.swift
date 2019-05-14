@@ -32,7 +32,7 @@ class MPMainViewController: UIViewController {
         }
     }
     @objc func payPressed(sender: AnyObject) {
-        model.paymentHandler.startPayment(delegate: self, paymentRequest: self.model.paymentRequest(paymentSummaryItems: self.model.defaultSummaryItems(subtotalAmount: 500, discountAmount: 100), shippingMethods: self.model.defaultShippingMethod()))
+        model.paymentHandler.startPayment(delegate: self, paymentRequest: self.model.paymentRequest(paymentSummaryItems: self.model.defaultSummaryItems(subtotalAmount: 1, discountAmount: 2), shippingMethods: self.model.defaultShippingMethod()))
     }
     
     @objc func setupPressed(sender: AnyObject) {
@@ -42,20 +42,22 @@ class MPMainViewController: UIViewController {
 }
 
 extension MPMainViewController: MPPaymentDelegate {
-    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
-        completion(.init(status: .success, errors: nil))
+    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didFailure failure: Error) {
+        print("error")
     }
     
-    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didFailure failure: MPPaymentErrorType) {
-
+    func paymentAuthorizationControllerDidSuccess(_ controller: PKPaymentAuthorizationController) {
+        print("下班")
     }
+    
+
     
     func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
         controller.dismiss(completion: nil)
     }
     
     func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didSelectShippingMethod shippingMethod: PKShippingMethod, handler completion: @escaping (PKPaymentRequestShippingMethodUpdate) -> Void) {
-        var items: [PKPaymentSummaryItem] = self.model.defaultSummaryItems(subtotalAmount: 550, discountAmount: 100)
+        var items: [PKPaymentSummaryItem] = self.model.defaultSummaryItems(subtotalAmount: 1, discountAmount: 2)
         if APShippingMethod.paperInvoice.identifier ==  shippingMethod.identifier {
             let paperItem = PKPaymentSummaryItem(label: "Paper Invoice", amount: NSDecimalNumber(string: "1"), type: .final)
             items.append(paperItem)
