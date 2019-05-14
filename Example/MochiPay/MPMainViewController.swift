@@ -42,12 +42,16 @@ class MPMainViewController: UIViewController {
 }
 
 extension MPMainViewController: MPPaymentDelegate {
+    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+        completion(.init(status: .success, errors: nil))
+    }
+    
     func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didFailure failure: MPPaymentErrorType) {
 
     }
     
     func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
-
+        controller.dismiss(completion: nil)
     }
     
     func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didSelectShippingMethod shippingMethod: PKShippingMethod, handler completion: @escaping (PKPaymentRequestShippingMethodUpdate) -> Void) {

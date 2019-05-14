@@ -7,9 +7,41 @@
 //
 
 import PassKit
+
+@objc public protocol MPPaymentDelegate : class {
+    
+    /// Tells the delegate that payment authorization failure.
+    @objc func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController,didFailure failure: MPPaymentErrorType)
+    
+    
+    /// Tells the delegate that payment authorization finished.
+    @objc func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController)
+    
+    
+    /// Tells the delegate that the user has authorized the payment request and asks for a result.
+    @objc optional func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void)
+    
+    
+    /// Tells the delegate that the user is authorizing the payment request.
+    @objc optional func paymentAuthorizationControllerWillAuthorizePayment(_ controller: PKPaymentAuthorizationController)
+    
+    
+    /// Tells the delegate that the user selected a shipping method and asks for an updated payment request.
+    @objc optional func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didSelectShippingMethod shippingMethod: PKShippingMethod, handler completion: @escaping (PKPaymentRequestShippingMethodUpdate) -> Void)
+    
+    
+    /// Tells the delegate that the user selected a shipping address and asks for an updated payment request.
+    @objc optional func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didSelectShippingContact contact: PKContact, handler completion: @escaping (PKPaymentRequestShippingContactUpdate) -> Void)
+    
+    
+    /// Tells the delegate that the payment method has changed and asks for an updated payment request.
+    @objc optional func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didSelectPaymentMethod paymentMethod: PKPaymentMethod, handler completion: @escaping (PKPaymentRequestPaymentMethodUpdate) -> Void)
+}
+
+
+
 public class MPPaymentHandler: NSObject {
     private var delegate: MPPaymentDelegate?
-    private var proxy: MPPaymentDelegateProxyClass?
     private var paymentSummaryItems: [PKPaymentSummaryItem] = []
     private var shippingMethods: [PKShippingMethod] = []
     
@@ -20,11 +52,10 @@ public class MPPaymentHandler: NSObject {
     
     public func startPayment(delegate: MPPaymentDelegate, paymentRequest: PKPaymentRequest) {
         self.delegate = delegate
-        self.proxy = MPPaymentDelegateProxyClass.init(proxy: self)
         self.paymentSummaryItems = paymentRequest.paymentSummaryItems
         self.shippingMethods = paymentRequest.shippingMethods ?? []
         let paymentController = PKPaymentAuthorizationController(paymentRequest: paymentRequest)
-        paymentController.delegate = proxy
+        paymentController.delegate = self
         paymentController.present(completion: { (presented: Bool) in
             if presented {
                 NSLog("Presented payment controller")
@@ -35,17 +66,13 @@ public class MPPaymentHandler: NSObject {
         })
     }
 }
-extension MPPaymentHandler: MPPaymentDelegateProxy {
-    func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
+extension MPPaymentHandler: PKPaymentAuthorizationControllerDelegate {
+    public func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
         print(#function)
-        controller.dismiss {
-            DispatchQueue.main.async {
-                self.delegate?.paymentAuthorizationControllerDidFinish(controller)
-            }
-        }
+        self.delegate?.paymentAuthorizationControllerDidFinish(controller)
     }
     
-    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+    public func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
         print(#function)
         if nil != self.delegate?.paymentAuthorizationController?(controller, didAuthorizePayment: payment, handler: { (result) in
             completion(result)
@@ -54,12 +81,12 @@ extension MPPaymentHandler: MPPaymentDelegateProxy {
         }
     }
     
-    func paymentAuthorizationControllerWillAuthorizePayment(_ controller: PKPaymentAuthorizationController) {
+    public func paymentAuthorizationControllerWillAuthorizePayment(_ controller: PKPaymentAuthorizationController) {
         print(#function)
         self.delegate?.paymentAuthorizationControllerWillAuthorizePayment?(controller)
     }
     
-    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didSelectShippingMethod shippingMethod: PKShippingMethod, handler completion: @escaping (PKPaymentRequestShippingMethodUpdate) -> Void) {
+    public func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didSelectShippingMethod shippingMethod: PKShippingMethod, handler completion: @escaping (PKPaymentRequestShippingMethodUpdate) -> Void) {
         print(#function)
         if nil == self.delegate?.paymentAuthorizationController?(controller, didSelectShippingMethod: shippingMethod, handler: { (update) in
             self.paymentSummaryItems = update.paymentSummaryItems
@@ -70,7 +97,7 @@ extension MPPaymentHandler: MPPaymentDelegateProxy {
         }
     }
     
-    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didSelectShippingContact contact: PKContact, handler completion: @escaping (PKPaymentRequestShippingContactUpdate) -> Void) {
+    public func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didSelectShippingContact contact: PKContact, handler completion: @escaping (PKPaymentRequestShippingContactUpdate) -> Void) {
         print(#function)
         
         if nil == self.delegate?.paymentAuthorizationController?(controller, didSelectShippingContact: contact, handler: { (update) in
@@ -83,7 +110,7 @@ extension MPPaymentHandler: MPPaymentDelegateProxy {
         }
     }
     
-    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didSelectPaymentMethod paymentMethod: PKPaymentMethod, handler completion: @escaping (PKPaymentRequestPaymentMethodUpdate) -> Void) {
+    public func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didSelectPaymentMethod paymentMethod: PKPaymentMethod, handler completion: @escaping (PKPaymentRequestPaymentMethodUpdate) -> Void) {
         print(#function)
         if nil == self.delegate?.paymentAuthorizationController?(controller, didSelectPaymentMethod: paymentMethod, handler: { (update) in
             self.paymentSummaryItems = update.paymentSummaryItems
