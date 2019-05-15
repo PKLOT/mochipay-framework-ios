@@ -11,7 +11,9 @@ import PassKit
 @objc public protocol MPPaymentDelegate : class {
     
     /// Tells the delegate that payment authorization failure.
-    @objc func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController,didFailure failure: Error)
+    @objc func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController,didFailure failure: NSError)
+    
+    /// Tells the delegate that payment authorization success.
     @objc func paymentAuthorizationControllerDidSuccess(_ controller: PKPaymentAuthorizationController)
     
     

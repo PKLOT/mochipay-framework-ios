@@ -42,7 +42,8 @@ class MPMainViewController: UIViewController {
 }
 
 extension MPMainViewController: MPPaymentDelegate {
-    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didFailure failure: Error) {
+    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didFailure failure: NSError) {
+        self.presentAlert(error: failure, action: nil, completion: nil)
     }
     
     func paymentAuthorizationControllerDidSuccess(_ controller: PKPaymentAuthorizationController) {
@@ -63,5 +64,26 @@ extension MPMainViewController: MPPaymentDelegate {
         completion(PKPaymentRequestShippingMethodUpdate.init(paymentSummaryItems: self.model.totalItems(items: items)))
     }
 
+}
+
+
+extension UIViewController {
+    func presentAlert(error: NSError?, action: ((UIAlertAction) -> Swift.Void)?, completion: (() -> Swift.Void)?) {
+        guard let error = error else {
+            return
+        }
+        self.presentAlert(title: "error",
+                          message: error.localizedDescription,
+                          action: ("ok", action),
+                          completion: completion)
+    }
+    
+    func presentAlert(title: String?, message: String?, action : (title: String?, actionClosure: ((UIAlertAction) -> Swift.Void)?), completion: (() -> Swift.Void)?) {
+        
+        let alert: UIAlertController = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+        let action: UIAlertAction = UIAlertAction.init(title: action.title, style: .default, handler: action.actionClosure)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: completion)
+    }
 }
 
