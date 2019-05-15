@@ -54,7 +54,7 @@ public class MPApis: NSObject {
             let string = String(decoding: data, as: UTF8.self)
             print("response data = \(string)")
             guard let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any] else {
-                completionHandler(.failure(NSError.mpError(localizedDescription: "json parse failed")))
+                completionHandler(.failure(NSError.mpError(localizedDescription: "json parse failed\n\(string)")))
                 return
             }
 
