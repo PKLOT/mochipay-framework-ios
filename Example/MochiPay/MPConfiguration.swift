@@ -10,6 +10,6 @@ import UIKit
 
 class MPConfiguration: NSObject {
     struct MPMerchant {
-        static let identififer = "merchant.com.pklotcorp.autopass"
+        static let identififer = "merchant.com.pklotcorp.autopass-alpha"
     }
 }

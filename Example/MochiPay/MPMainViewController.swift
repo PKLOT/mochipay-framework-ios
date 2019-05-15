@@ -43,11 +43,9 @@ class MPMainViewController: UIViewController {
 
 extension MPMainViewController: MPPaymentDelegate {
     func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didFailure failure: Error) {
-        print("error")
     }
     
     func paymentAuthorizationControllerDidSuccess(_ controller: PKPaymentAuthorizationController) {
-        print("下班")
     }
     
 

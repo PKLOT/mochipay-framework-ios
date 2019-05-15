@@ -22,28 +22,57 @@ public class MPApis: NSObject {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         // insert json data to the request
         request.httpBody = jsonData
-        
+        self.request(request: request) {result in
+            switch result {
+            case .success:
+                completionHandler(.success(() as Void))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+     
+    }
+    
+    
+    private func request(request: URLRequest, completionHandler: @escaping (Result<[String: Any], NSError>) -> Void) {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            
-            guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
+            guard nil == error else {
                 completionHandler(.failure(error! as NSError))
                 return
             }
-        
-            let string = String(decoding: data, as: UTF8.self)
-            print("response data = \(string)")
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            if let responseJSON = responseJSON as? [String: Any] {
-                print("responseJSON = \(responseJSON)")
-                completionHandler(.success(() as Void))
-            } else {
-                completionHandler(.failure(NSError.init(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: string])))
+            
+            guard let response = response as? HTTPURLResponse  else{
+                completionHandler(.failure(NSError.mpError(localizedDescription: "response is nil")))
+                return
             }
             
+            guard let data = data else {
+                completionHandler(.failure(NSError.mpError(localizedDescription: "data is nil")))
+                return
+            }
             
+            let string = String(decoding: data, as: UTF8.self)
+            print("response data = \(string)")
+            guard let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any] else {
+                completionHandler(.failure(NSError.mpError(localizedDescription: "json parse failed")))
+                return
+            }
+
+            if 200 ... 399 ~= response.statusCode {
+                completionHandler(.success(responseJSON))
+            } else {
+                completionHandler(.failure(NSError.mpError(localizedDescription: string)))
+            }
+        
         }
         
         task.resume()
+    }
+}
+
+extension NSError {
+    class func mpError(code: Int = 0, localizedDescription: String) -> NSError {
+        print("[MPError]: \(localizedDescription)")
+        return NSError.init(domain: "com.pklotcorp.mochipay", code: code, userInfo: [NSLocalizedDescriptionKey: localizedDescription])
     }
 }

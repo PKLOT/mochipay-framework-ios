@@ -84,7 +84,7 @@ class MPMainViewModel: NSObject {
         let request: PKPaymentRequest = PKPaymentRequest.init()
         request.countryCode = "TW"
         request.currencyCode = "TWD"
-        request.supportedNetworks = [.masterCard, .visa]
+        request.supportedNetworks = [.masterCard, .visa, .JCB]
         request.merchantCapabilities = .capability3DS
         request.merchantIdentifier = MPConfiguration.MPMerchant.identififer
         request.paymentSummaryItems = self.totalItems(items: paymentSummaryItems)
