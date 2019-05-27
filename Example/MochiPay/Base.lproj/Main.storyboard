@@ -20,8 +20,25 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rOG-Ps-lyc">
+                                <rect key="frame" x="47.5" y="303.5" width="280" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="5Bi-xm-zEi"/>
+                                    <constraint firstAttribute="height" constant="60" id="H7A-gI-jjO"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="rOG-Ps-lyc" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="KUZ-MO-Oma"/>
+                            <constraint firstItem="rOG-Ps-lyc" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="xEJ-Ke-i6Q"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="paymentButtonContentView" destination="rOG-Ps-lyc" id="cAW-zd-d1L"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

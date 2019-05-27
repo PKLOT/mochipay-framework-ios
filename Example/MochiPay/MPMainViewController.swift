@@ -12,6 +12,7 @@ import MochiPay
 class MPMainViewController: UIViewController {
     
     let model:MPMainViewModel =  MPMainViewModel()
+    @IBOutlet weak var paymentButtonContentView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,10 +28,10 @@ class MPMainViewController: UIViewController {
         if button != nil {
             self.view.addSubview(button!)
             button!.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([button!.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                                         button!.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-                                        button!.widthAnchor.constraint(equalToConstant: 280),
-                                        button!.heightAnchor.constraint(equalToConstant: 60)])
+            NSLayoutConstraint.activate([button!.topAnchor.constraint(equalTo: paymentButtonContentView.topAnchor),
+                                         button!.bottomAnchor.constraint(equalTo: paymentButtonContentView.bottomAnchor),
+                                        button!.trailingAnchor.constraint(equalTo: paymentButtonContentView.trailingAnchor),
+                                        button!.leadingAnchor.constraint(equalTo: paymentButtonContentView.leadingAnchor)])
         }
     }
     @objc func payPressed(sender: AnyObject) {
