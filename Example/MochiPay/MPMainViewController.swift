@@ -28,7 +28,9 @@ class MPMainViewController: UIViewController {
             self.view.addSubview(button!)
             button!.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([button!.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                                         button!.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)])
+                                         button!.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+                                        button!.widthAnchor.constraint(equalToConstant: 280),
+                                        button!.heightAnchor.constraint(equalToConstant: 60)])
         }
     }
     @objc func payPressed(sender: AnyObject) {
