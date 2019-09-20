@@ -9,8 +9,8 @@ import UIKit
 
 public class MPApis: NSObject {
     public static let shared: MPApis = MPApis()
-    
-    public func applePay(paymenyData: String, completionHandler: @escaping (Result<Void, NSError>) -> Void){
+
+    public func applePay(paymenyData: String, completionHandler: @escaping (Result<Void, NSError>) -> Void) {
         let json: [String: Any] = ["token_json": paymenyData,
                                    "order_type": "parking_order",
                                    "order_number": "order_number_test",
@@ -22,35 +22,33 @@ public class MPApis: NSObject {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         // insert json data to the request
         request.httpBody = jsonData
-        self.request(request: request) {result in
+        self.request(request: request) { result in
             switch result {
             case .success:
                 completionHandler(.success(() as Void))
-            case .failure(let error):
+            case let .failure(error):
                 completionHandler(.failure(error))
             }
         }
-     
     }
-    
-    
+
     private func request(request: URLRequest, completionHandler: @escaping (Result<[String: Any], NSError>) -> Void) {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard nil == error else {
+            guard error == nil else {
                 completionHandler(.failure(error! as NSError))
                 return
             }
-            
-            guard let response = response as? HTTPURLResponse  else{
+
+            guard let response = response as? HTTPURLResponse else {
                 completionHandler(.failure(NSError.mpError(localizedDescription: "response is nil")))
                 return
             }
-            
+
             guard let data = data else {
                 completionHandler(.failure(NSError.mpError(localizedDescription: "data is nil")))
                 return
             }
-            
+
             let string = String(decoding: data, as: UTF8.self)
             print("response data = \(string)")
             guard let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any] else {
@@ -63,9 +61,8 @@ public class MPApis: NSObject {
             } else {
                 completionHandler(.failure(NSError.mpError(localizedDescription: string)))
             }
-        
         }
-        
+
         task.resume()
     }
 }
@@ -73,6 +70,6 @@ public class MPApis: NSObject {
 extension NSError {
     class func mpError(code: Int = 0, localizedDescription: String) -> NSError {
         print("[MPError]: \(localizedDescription)")
-        return NSError.init(domain: "com.pklotcorp.mochipay", code: code, userInfo: [NSLocalizedDescriptionKey: localizedDescription])
+        return NSError(domain: "com.pklotcorp.mochipay", code: code, userInfo: [NSLocalizedDescriptionKey: localizedDescription])
     }
 }

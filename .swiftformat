@@ -1,0 +1,3 @@
+# https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#unusedarguments
+--disable unusedArguments
+--exclude Examples/Pods
